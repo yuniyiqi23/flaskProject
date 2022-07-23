@@ -1,4 +1,5 @@
-from flask import Blueprint, request, make_response
+from flask import Blueprint, request, make_response, url_for, redirect
+from flask import flash, render_template
 import json
 from models.account import Account
 
@@ -8,6 +9,15 @@ user_bluepoint = Blueprint('user', __name__, url_prefix='/user')
 @user_bluepoint.route('/add', methods=('GET', 'POST'))
 def add():
     return "user_add"
+
+
+@user_bluepoint.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'GET':
+        flash('You were successfully logged in')
+        return redirect(url_for('index'))
+    return render_template('login.html', error=error)
 
 
 @user_bluepoint.route('/get', methods=["GET"])

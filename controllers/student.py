@@ -1,12 +1,12 @@
 from flask import Blueprint, request, make_response, url_for, redirect
 import json, os
 
-std_bp = Blueprint('std', __name__, url_prefix='/std')
+student_bp = Blueprint('student', __name__, url_prefix='/student')
 
 filename = 'mock_data/students.txt'
 
 
-@std_bp.route('/get', methods=('GET', 'POST'))
+@student_bp.route('/get', methods=('GET', 'POST'))
 def get():
     if os.path.exists(filename):
         with open(filename, 'r', encoding='utf-8') as rfile:

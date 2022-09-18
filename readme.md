@@ -16,17 +16,14 @@ pipreqs ./
 ### 部署
 #### uwsgi命令行启动
 uwsgi --http-socket :5000 --wsgi-file run.py --callable app --master --processes 4 --threads 2
-#### 配置文件启动
-uwsgi --ini uwsgi.ini
 
-uwsgi --reload /tmp/logs/movie.pid
+#### 配置文件启动(阿里云看这里)
+cd /home/adam/flaskProject
+uwsgi --ini uwsgi.ini //启动
+uwsgi --stop /tmp/logs/movie.pid //停止服务  
+uwsgi --reload /tmp/logs/movie.pid //可以无缝重启服务
 
+##### 通过命令行停止服务
+ps -ef | grep uwsgi //kill掉一个就行了  
 uWSGI 通过 xxx.ini 启动后会在相同目录下生成一个 xxx.pid 的文件，里面只有一行内容是 uWSGI 的主进程的进程号。
 
-uwsgi --ini cms_uwsgi.ini    //启动
-  
-uwsgi  cms_uwsgi.ini   --deamonize //后台运行启动  
-  
-uwsgi --stop uwsgi.pid  //停止服务  
-  
-uwsgi --reload uwsgi.pid  //可以无缝重启服务
